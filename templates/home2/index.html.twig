@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Le titre index.html
+{% endblock %}
+
+{% block body %}
+    <h1>TWIG</h1>
+
+    <p>{{ prenom }}</p>
+
+{#    Création de ma variable promo#}
+    {% set promo = "D2WM23" %}
+
+    {% if promo == "D2WM23" %}
+        <p>C'est la bonne promo</p>
+    {% endif %}
+
+    {% set consoles =[
+        "Playstation",
+        "Xbox",
+        "PC",
+        "Game Boy"
+    ] %}
+
+    {% for console  in consoles  %}
+        <p>{{ console }}</p>
+    {% endfor %}
+
+    {% set aujourdhui = "2023-04-24 16:36:00" %}
+    <p>{{ aujourdhui | date('m/d/Y H:i') }}</p>
+
+{% endblock %}
