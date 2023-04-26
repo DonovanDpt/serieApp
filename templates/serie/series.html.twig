@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for serie in tabDeSeries %}
+        <article>
+            <a href="{{ path('serie_serie', {'serie': serie.id}) }}">
+                <img
+                        src="{{ asset('img/series/'~serie.image) }}"
+                        alt="{{ serie.nom }}">
+            </a>
+        </article>
+        {% else %}
+            <p>Aucune série en base de données</p>
+    {% endfor %}
+{% endblock %}
