@@ -20,10 +20,10 @@ class Home2Controller extends AbstractController
 
     public function index2(): Response
     {
-        $prenom = "Donovan";
+        $prenom = 'Donovan';
         return $this->render(
             'home2/index.html.twig', [
-            "prenom" => $prenom,
+            'prenom' => $prenom,
         ]
         );
     }
