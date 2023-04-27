@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Serie;
+use App\Form\SerieType;
 use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,18 @@ class SerieController extends AbstractController
 
         return $this->render('serie/serie.html.twig',
         compact(var_name: 'serie')
+        );
+    }
+
+    #[Route('/ajouter', name: '_ajouter')]
+    public function ajouter(): Response
+    {
+        $serie = new Serie();
+        $serie->setNom("Game of Throne");
+        $serieForm = $this->createForm(SerieType::class, $serie);
+        return $this->render(
+            'serie/ajouter.html.twig',
+            compact('serieForm')
         );
     }
 }
