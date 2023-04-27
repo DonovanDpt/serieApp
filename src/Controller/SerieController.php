@@ -59,7 +59,7 @@ class SerieController extends AbstractController
         //permet de récuperer les informations du formulaire
         $serieForm->handleRequest($request);
         //Si l'utilisateur a envoyer le form, on le redirige vers la page où il ajoute son élément
-        if ($serieForm->isSubmitted()){
+        if ($serieForm->isSubmitted() && $serieForm->isValid()){
             //methode qui permet d'update en base de donnée
             $entityManager->persist($serie);
             $entityManager->flush();
