@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Serie;
 use App\Form\SerieType;
 use App\Repository\SerieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 #[Route('/series', name: 'serie')]
@@ -46,11 +48,24 @@ class SerieController extends AbstractController
     }
 
     #[Route('/ajouter', name: '_ajouter')]
-    public function ajouter(): Response
+    public function ajouter(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response
     {
         $serie = new Serie();
         $serie->setNom("Game of Throne");
         $serieForm = $this->createForm(SerieType::class, $serie);
+        //permet de récuperer les informations du formulaire
+        $serieForm->handleRequest($request);
+        //Si l'utilisateur a envoyer le form, on le redirige vers la page où il ajoute son élément
+        if ($serieForm->isSubmitted()){
+            //methode qui permet d'update en base de donnée
+            $entityManager->persist($serie);
+            $entityManager->flush();
+            return $this->redirectToRoute('serie_series');
+        }
+
         return $this->render(
             'serie/ajouter.html.twig',
             compact('serieForm')
