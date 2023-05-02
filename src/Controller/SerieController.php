@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 #[Route('/series', name: 'serie')]
 class SerieController extends AbstractController
 {
@@ -18,8 +20,9 @@ class SerieController extends AbstractController
         SerieRepository $serieRepository //injection de dépendance
     ): Response
     {
+        $utilisateurConnecte = $this->getUser();
+        dump($utilisateurConnecte);
         $tabDeSeries = $serieRepository->findAll();
-        dump($tabDeSeries);
         return $this->render(
             'serie/series.html.twig',
             compact('tabDeSeries')
@@ -48,6 +51,7 @@ class SerieController extends AbstractController
         );
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/ajouter', name: '_ajouter')]
     public function ajouter(
         Request $request,
