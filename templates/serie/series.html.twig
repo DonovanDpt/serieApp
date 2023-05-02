@@ -6,7 +6,12 @@
             <a href="{{ path('serie_serie', {'serie': serie.id}) }}">
                 <img
                         src="{{ asset('img/series/'~serie.image) }}"
-                        alt="{{ serie.nom }}">
+                        alt="{{ serie.nom }}"
+                        title="{{ serie.saisons | length }} saison{{ serie.saisons | length > 1 ? 's' : '' }}"
+
+
+                >
+
             </a>
         </article>
         {% else %}

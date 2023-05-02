@@ -2,6 +2,11 @@
 
 {% block body %}
     <p>{{ serie.nom}}</p>
+    <div>
+        {% for chaque_saison in serie.saisons %}
+            <img src="{{ asset('img/seasons/'~chaque_saison.image) }}" alt="">
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block title %}

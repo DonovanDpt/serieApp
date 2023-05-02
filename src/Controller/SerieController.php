@@ -19,6 +19,7 @@ class SerieController extends AbstractController
     ): Response
     {
         $tabDeSeries = $serieRepository->findAll();
+        dump($tabDeSeries);
         return $this->render(
             'serie/series.html.twig',
             compact('tabDeSeries')
